@@ -53,8 +53,16 @@ class Register extends Component {
     }
   };
 
-  displayErrors = errors =>
+  displayErrors = errors => {
     errors.map((error, i) => <p key={i}>{error.message}</p>);
+    setTimeout(() => this.setState({ errors: [] }), 3000);
+  };
+
+  handleInputError = (errors, inputName) => {
+    return errors.some(error => error.message.toLowerCase().includes(inputName))
+      ? "error"
+      : "";
+  };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -80,7 +88,7 @@ class Register extends Component {
             .then(() => {
               this.saveUser(createdUser).then(() => {
                 console.log("user saved");
-                this.setState({ loading: false });
+                // this.setState({ loading: false });
               });
             })
             .catch(err => {
@@ -109,12 +117,6 @@ class Register extends Component {
     });
   };
 
-  handleInputError = (errors, inputName) => {
-    return errors.some(error => error.message.toLowerCase().includes(inputName))
-      ? "error"
-      : "";
-  };
-
   render() {
     const {
       username,
@@ -128,7 +130,7 @@ class Register extends Component {
     return (
       <Grid textAlign="center" verticalAlign="middle" className="app">
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" icon icon-color="orange" textAlign="center">
+          <Header as="h1" icon icon-color="orange" textAlign="center">
             <Icon name="puzzle piece" color="orange" />
             Register for DevChat
           </Header>
