@@ -54,8 +54,8 @@ class Register extends Component {
   };
 
   displayErrors = errors => {
-    errors.map((error, i) => <p key={i}>{error.message}</p>);
-    setTimeout(() => this.setState({ errors: [] }), 3000);
+    setTimeout(() => this.setState({ errors: [] }), 5000);
+    return errors.map((error, i) => <p key={i}>{error.message}</p>);
   };
 
   handleInputError = (errors, inputName) => {
@@ -92,7 +92,7 @@ class Register extends Component {
               });
             })
             .catch(err => {
-              console.log(err);
+              console.error(err);
               this.setState({
                 errors: this.state.errors.concat(err),
                 loading: false
@@ -101,7 +101,7 @@ class Register extends Component {
         })
 
         .catch(err => {
-          console.log(err);
+          console.error(err);
           this.setState({
             errors: this.state.errors.concat(err),
             loading: false
