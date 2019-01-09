@@ -39,14 +39,14 @@ class Root extends React.Component {
   }
 
   render() {
-    return this.props.isLoading ? (
-      <Spinner />
-    ) : (
+    return !this.props.isLoading ? (
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>
+    ) : (
+      <Spinner />
     );
   }
 }

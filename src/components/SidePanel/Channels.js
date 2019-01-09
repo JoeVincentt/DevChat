@@ -14,11 +14,22 @@ class Channels extends Component {
     loading: false
   };
 
+  componentDidMount() {
+    this.addListeners();
+  }
+
+  addListeners = () => {
+    let loadedChannels = [];
+    this.state.channelsRef.on("child_added", snap => {
+      loadedChannels.push(snap.val());
+      this.setState({ channels: loadedChannels });
+    });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
 
     if (this.isFormValid(this.state)) {
-      console.log("form valid");
       this.setState({ loading: true });
       this.addChannel();
     }
@@ -65,6 +76,19 @@ class Channels extends Component {
   openModal = () => this.setState({ modal: true });
   closeModal = () => this.setState({ modal: false });
 
+  displayChannels = channels =>
+    channels.length > 0 &&
+    channels.map(channel => (
+      <MenuItem
+        key={channel.id}
+        onClick={() => console.log(channel)}
+        name={channel.name}
+        style={{ opacity: 0.7 }}
+      >
+        # {channel.name}
+      </MenuItem>
+    ));
+
   render() {
     const { channels, modal, loading } = this.state;
     return (
@@ -82,6 +106,7 @@ class Channels extends Component {
             />
           </MenuItem>
           {/* Channel */}
+          {this.displayChannels(channels)}
         </MenuMenu>
         {/* // Add channel */}
         <Modal basic open={modal} onClose={this.closeModal}>
