@@ -110,13 +110,8 @@ class Channels extends Component {
 
           <ModalActions>
             {loading ? null : (
-              <Button color="green" inverted disabled={loading}>
-                <Icon
-                  name="checkmark"
-                  disabled={loading}
-                  onClick={this.handleSubmit}
-                />{" "}
-                Add
+              <Button color="green" inverted>
+                <Icon name="checkmark" onClick={this.handleSubmit} /> Add
               </Button>
             )}
 
