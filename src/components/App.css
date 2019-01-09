@@ -8,7 +8,7 @@ body,
 
 /* Messages */
 .messages {
-  height: 440px;
+  height: 420px;
   overflow-y: scroll;
 }
 
@@ -16,6 +16,7 @@ body,
 
 .message__form {
   position: fixed !important;
+  overflow-y: scroll;
   bottom: 1em;
   margin-left: 320px !important;
   left: 0;
