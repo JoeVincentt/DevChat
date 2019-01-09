@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setCurrentChannel } from "../../actions/index";
 //prettier-ignore
 import { MenuMenu, MenuItem, Icon, Modal, ModalHeader, ModalContent, Form, FormField, Input, ModalActions, Button } from "semantic-ui-react";
 import firebase from "../../firebase";
@@ -73,6 +75,10 @@ class Channels extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  changeChannel = channel => {
+    this.props.setCurrentChannel(channel);
+  };
+
   openModal = () => this.setState({ modal: true });
   closeModal = () => this.setState({ modal: false });
 
@@ -81,7 +87,7 @@ class Channels extends Component {
     channels.map(channel => (
       <MenuItem
         key={channel.id}
-        onClick={() => console.log(channel)}
+        onClick={() => this.changeChannel(channel)}
         name={channel.name}
         style={{ opacity: 0.7 }}
       >
@@ -149,4 +155,7 @@ class Channels extends Component {
     );
   }
 }
-export default Channels;
+export default connect(
+  null,
+  { setCurrentChannel }
+)(Channels);
