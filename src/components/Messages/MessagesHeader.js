@@ -9,7 +9,12 @@ import {
 
 class MessagesHeader extends Component {
   render() {
-    const { channelName, numUniqueUsers } = this.props;
+    const {
+      channelName,
+      numUniqueUsers,
+      handleSearchChange,
+      searchLoading
+    } = this.props;
 
     return (
       <Segment clearing>
@@ -25,10 +30,12 @@ class MessagesHeader extends Component {
         {/* Channel search input */}
         <Header floated="right">
           <Input
+            loading={searchLoading}
+            onChange={handleSearchChange}
             size="mini"
             icon="search"
             name="searchTerm"
-            placeholder="Search Meassages"
+            placeholder="Search Messages"
           />
         </Header>
       </Segment>
