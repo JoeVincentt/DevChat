@@ -17,6 +17,16 @@ class DirectMessages extends Component {
     }
   }
 
+  componentWillMount() {
+    this.removeListeners();
+  }
+
+  removeListeners = () => {
+    this.state.usersRef.off();
+    this.state.connectedRef.off();
+    this.state.presenceRef.off();
+  };
+
   addListeners = currentUserUid => {
     let loadedUsers = [];
     this.state.usersRef.on("child_added", snap => {
@@ -25,7 +35,7 @@ class DirectMessages extends Component {
         user["uid"] = snap.key;
         user["status"] = "offline";
         loadedUsers.push(user);
-        this.setState({ users: loadedUsers });
+        this.setState({ ...this.state, users: loadedUsers });
       }
     });
     this.state.connectedRef.on("value", snap => {
