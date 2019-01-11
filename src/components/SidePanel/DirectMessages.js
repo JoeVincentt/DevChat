@@ -15,13 +15,15 @@ class DirectMessages extends Component {
   };
 
   componentDidMount() {
+    this.mounted = true;
     if (this.state.user) {
       this.addListeners(this.state.user.uid);
     }
   }
 
-  componentWillMount() {
-    this.removeListeners();
+  componentWillUnmount() {
+    this.mounted = false;
+    // this.removeListeners();
   }
 
   removeListeners = () => {
