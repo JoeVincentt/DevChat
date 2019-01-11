@@ -13,20 +13,10 @@ class Starred extends Component {
   };
 
   componentDidMount() {
-    // this.mounted = true;
-    if (this.state.user) {
+    if (this.state.user && this.mounted) {
       this.addListeners(this.state.user.uid);
     }
   }
-
-  // componentWillUnmount() {
-  //   this.mounted = false;
-  //   this.removeListeners();
-  // }
-
-  // removeListeners = () => {
-  //   this.state.usersRef.off();
-  // };
 
   addListeners = userId => {
     this.state.usersRef
@@ -57,7 +47,6 @@ class Starred extends Component {
 
   changeChannel = channel => {
     this.setActiveChannel(channel);
-
     this.props.setCurrentChannel(channel);
     this.props.setPrivateChannel(false);
   };

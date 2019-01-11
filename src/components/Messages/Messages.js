@@ -55,7 +55,7 @@ class Messages extends Component {
       .child("starred")
       .once("value")
       .then(data => {
-        if (data.val !== null) {
+        if (data.val() !== null) {
           const channelIds = Object.keys(data.val());
           const prevStarred = channelIds.includes(channelId);
           this.setState({ isChannelStarred: prevStarred });
