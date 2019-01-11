@@ -83,7 +83,7 @@ class Channels extends Component {
 
   removeListeners = () => {
     this.state.channelsRef.off();
-    // this.state.messagesRef.off();
+    this.state.messagesRef.off();
   };
 
   setFirstChannel = () => {
@@ -91,7 +91,7 @@ class Channels extends Component {
     if (this.state.firstLoad && this.state.channels.length > 0) {
       this.props.setCurrentChannel(firstChannel);
       this.setActiveChannel(firstChannel);
-      this.setState({ ...this.state, channel: firstChannel });
+      this.setState({ channel: firstChannel });
     }
     this.setState({ firstLoad: false });
   };

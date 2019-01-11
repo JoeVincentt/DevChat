@@ -23,7 +23,7 @@ class DirectMessages extends Component {
 
   componentWillUnmount() {
     this.mounted = false;
-    // this.removeListeners();
+    this.removeListeners();
   }
 
   removeListeners = () => {
@@ -40,7 +40,7 @@ class DirectMessages extends Component {
         user["uid"] = snap.key;
         user["status"] = "offline";
         loadedUsers.push(user);
-        this.setState({ ...this.state, users: loadedUsers });
+        this.setState({ users: loadedUsers });
       }
     });
     this.state.connectedRef.on("value", snap => {

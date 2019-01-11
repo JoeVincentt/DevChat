@@ -86,7 +86,7 @@ class Messages extends Component {
     }, []);
     const plural = uniqueUsers.length > 1 || uniqueUsers.length === 0;
     const numUniqueUsers = `${uniqueUsers.length} user${plural ? "s" : ""}`;
-    this.setState({ ...this.state, numUniqueUsers: numUniqueUsers });
+    this.setState({ numUniqueUsers });
   };
 
   displayMessages = messages =>
