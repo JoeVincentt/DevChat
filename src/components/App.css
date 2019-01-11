@@ -1,7 +1,7 @@
 html,
 body,
 .app {
-  height: 100vh;
+  height: 90vh;
   background: #eee;
   padding: 1em;
 }
@@ -13,12 +13,12 @@ body,
 
 /* Messages */
 .messages {
-  height: 62vh;
+  height: 56vh;
   overflow-y: scroll;
 }
 
 .messages__progress {
-  height: 58vh;
+  height: 52vh;
   overflow-y: scroll;
 }
 
