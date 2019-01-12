@@ -32,6 +32,14 @@ class Channels extends Component {
     this.removeListeners();
   }
 
+  removeListeners = () => {
+    this.state.channelsRef.off();
+    // this.state.messagesRef.off();
+    this.state.channels.forEach(channel => {
+      this.state.messagesRef.child(channel.id).off();
+    });
+  };
+
   addListeners = () => {
     let loadedChannels = [];
     this.state.channelsRef.on("child_added", snap => {
@@ -80,11 +88,6 @@ class Channels extends Component {
     }
 
     this.setState({ notifications });
-  };
-
-  removeListeners = () => {
-    this.state.channelsRef.off();
-    this.state.messagesRef.off();
   };
 
   setFirstChannel = () => {
