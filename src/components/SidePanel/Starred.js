@@ -13,7 +13,7 @@ class Starred extends Component {
   };
 
   componentDidMount() {
-    if (this.state.user && this.mounted) {
+    if (this.state.user) {
       this.addListeners(this.state.user.uid);
     }
   }

@@ -136,7 +136,7 @@ class MessageForm extends Component {
 
   getPath = () => {
     if (this.props.isPrivateChannel) {
-      return `chat/private-${this.state.channel.id}`;
+      return `chat/private/${this.state.channel.id}`;
     } else {
       return "chat/public";
     }
@@ -163,7 +163,7 @@ class MessageForm extends Component {
             this.setState({ percentUploaded });
           },
           err => {
-            console.error(err, "line 95");
+            console.error(err, "MessagesForm.js line 166");
             this.setState({
               errors: this.state.errors.concat(err),
               uploadState: "error",
@@ -177,7 +177,7 @@ class MessageForm extends Component {
                 this.sendFileMessage(downloadURL, ref, pathToUpload);
               })
               .catch(err => {
-                console.error(err, "line 109");
+                console.error(err, "MessagesForm.js line 180");
                 this.setState({
                   errors: this.state.errors.concat(err),
                   uploadState: "error",
