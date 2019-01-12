@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { Sidebar, Menu, Divider, Button, Modal, ModalHeader, ModalContent, ModalActions, Icon, Label, Segment } from "semantic-ui-react";
 import { SliderPicker } from "react-color";
 import firebase from "../../firebase";
+import { connect } from "react-redux";
+import { setColors } from "../../actions/index";
 
 class ColorPanel extends Component {
   state = {
@@ -130,4 +132,7 @@ class ColorPanel extends Component {
     );
   }
 }
-export default ColorPanel;
+export default connect(
+  null,
+  { setColors }
+)(ColorPanel);

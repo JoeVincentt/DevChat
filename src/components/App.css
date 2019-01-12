@@ -1,7 +1,7 @@
 html,
 body,
-.app {
-  height: 90vh;
+.App {
+  height: 100vh;
   background: #eee;
   padding: 1em;
 }
@@ -53,6 +53,7 @@ body,
 /* ColorPanel.js */
 
 .color__container {
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   width: 35px;
