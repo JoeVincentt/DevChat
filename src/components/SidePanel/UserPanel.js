@@ -31,7 +31,8 @@ class UserPanel extends Component {
     metadata: {
       contentType: "image/jpeg"
     },
-    uploadedCroppedImage: ""
+    uploadedCroppedImage: "",
+    uploadingImage: false
   };
 
   openModal = () => this.setState({ modal: true });
@@ -58,6 +59,7 @@ class UserPanel extends Component {
   ];
 
   uploadCroppedImage = () => {
+    this.setState({ uploadingImage: true });
     const { storageRef, userRef, blob, metadata } = this.state;
     storageRef
       .child(`avatars/user-${userRef.uid}`)
@@ -88,6 +90,7 @@ class UserPanel extends Component {
       .update({ avatar: this.state.uploadedCroppedImage })
       .then(() => {
         console.log("User avatar updated");
+        this.setState({ uploadingImage: false });
       })
       .catch(err => {
         console.error(err);
@@ -126,7 +129,13 @@ class UserPanel extends Component {
   };
 
   render() {
-    const { user, modal, previewImage, croppedImage } = this.state;
+    const {
+      user,
+      modal,
+      previewImage,
+      croppedImage,
+      uploadingImage
+    } = this.state;
     const { primaryColor } = this.props;
 
     return (
@@ -196,6 +205,7 @@ class UserPanel extends Component {
             <ModalActions>
               {croppedImage && (
                 <Button
+                  disabled={uploadingImage}
                   color="green"
                   inverted
                   onClick={this.uploadCroppedImage}
