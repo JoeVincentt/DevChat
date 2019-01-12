@@ -7,14 +7,24 @@ import {
   GridRow,
   Icon,
   Dropdown,
-  Image
+  Image,
+  Modal,
+  ModalHeader,
+  ModalContent,
+  Input,
+  ModalActions,
+  Button
 } from "semantic-ui-react";
 import firebase from "../../firebase";
 
 class UserPanel extends Component {
   state = {
-    user: this.props.currentUser
+    user: this.props.currentUser,
+    modal: false
   };
+
+  openModal = () => this.setState({ modal: true });
+  closeModal = () => this.setState({ modal: false });
 
   dropdownOptions = () => [
     {
@@ -28,7 +38,7 @@ class UserPanel extends Component {
     },
     {
       key: "avatar",
-      text: <span>Change Avatar</span>
+      text: <span onClick={this.openModal}>Change Avatar</span>
     },
     {
       key: "signout",
@@ -44,7 +54,7 @@ class UserPanel extends Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, modal } = this.state;
     const { primaryColor } = this.props;
 
     return (
@@ -69,6 +79,32 @@ class UserPanel extends Component {
               />
             </Header>
           </GridRow>
+          {/* Change user Avatar Modal */}
+          <Modal basic open={modal} onClose={this.closeModal}>
+            <ModalHeader>Change Avatar</ModalHeader>
+            <ModalContent>
+              <Input fluid type="file" label="New Avatar" name="previewImage" />
+              <Grid centered stackable columns={2}>
+                <GridRow centered>
+                  <GridColumn className="ui centered aligned grid">
+                    {/* Image Preview */}
+                  </GridColumn>
+                  <GridColumn>{/* Cropped image preview */}</GridColumn>
+                </GridRow>
+              </Grid>
+            </ModalContent>
+            <ModalActions>
+              <Button color="green" inverted>
+                <Icon name="save" /> Save Avatar
+              </Button>
+              <Button color="orange" inverted>
+                <Icon name="image" /> Preview
+              </Button>
+              <Button color="red" inverted onClick={this.closeModal}>
+                <Icon name="remove" /> Cancel
+              </Button>
+            </ModalActions>
+          </Modal>
         </GridColumn>
       </Grid>
     );
